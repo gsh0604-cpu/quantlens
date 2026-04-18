@@ -144,11 +144,12 @@ export default function Home() {
           <Link href="/portfolio" style={{ background: "#a78bfa18", border: "1px solid #a78bfa40", color: "#a78bfa", padding: "7px 12px", borderRadius: 6, fontSize: 10, fontFamily: "monospace", fontWeight: 700, letterSpacing: "0.08em", textDecoration: "none", whiteSpace: "nowrap" }}>
             ETF PORTFOLIO →
           </Link>
-        </div>
-      </div>
-<Link href="/positions" style={{ background: "#f59e0b18", border: "1px solid #f59e0b40", color: "#f59e0b", padding: "7px 12px", borderRadius: 6, fontSize: 10, fontFamily: "monospace", fontWeight: 700, letterSpacing: "0.08em", textDecoration: "none", whiteSpace: "nowrap" }}>
+              <Link href="/positions" style={{ background: "#f59e0b18", border: "1px solid #f59e0b40", color: "#f59e0b", padding: "7px 12px", borderRadius: 6, fontSize: 10, fontFamily: "monospace", fontWeight: 700, letterSpacing: "0.08em", textDecoration: "none", whiteSpace: "nowrap" }}>
   MY PORTFOLIO →
 </Link>
+        </div>
+      </div>
+
 
       {/* Watchlist */}
       <div style={{ padding: "8px 16px", display: "flex", gap: 6, borderBottom: "1px solid #1a2a3a", flexWrap: "wrap", overflowX: "auto" }}>
