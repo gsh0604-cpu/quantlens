@@ -213,66 +213,77 @@ export default function Home() {
             </div>
           </div>
 
-          {/* AI Verdict button */}
-          {!verdict && !aiLoading && (
-            <button onClick={fetchAI}
-              style={{ background: "linear-gradient(135deg,#00ff8815,#00b8ff0d)", border: "1px solid #00ff8830", color: "#00ff88", padding: "14px", borderRadius: 8, cursor: "pointer", fontSize: 12, fontFamily: "monospace", letterSpacing: "0.15em", fontWeight: 700, width: "100%" }}>
-              ⚡ GENERATE AI VERDICT
-            </button>
-          )}
+          {/* ── AI Verdict — compact strip, always visible, models stay put ── */}
+          <div style={{ background: "#0a1220", border: `1px solid ${vc !== "#94a3b8" ? vc + "33" : "#1a2a3a"}`, borderRadius: 10, overflow: "hidden" }}>
 
-          {/* AI loading */}
-          {aiLoading && (
-            <div style={{ background: "#0a1220", border: "1px solid #1a2a3a", borderRadius: 8, padding: 16, display: "flex", gap: 12, alignItems: "center" }}>
-              <div style={{ width: 18, height: 18, border: "2px solid #1a2a3a", borderTop: "2px solid #00ff88", borderRadius: "50%", animation: "spin 0.8s linear infinite", flexShrink: 0 }} />
-              <span style={{ color: "#3d5a70", fontSize: 11, letterSpacing: "0.08em" }}>SYNTHESIZING SIGNALS WITH AI...</span>
-            </div>
-          )}
+            {/* Top row: ⚡ button + verdict inline */}
+            <div style={{ display: "flex", alignItems: "stretch" }}>
 
-          {/* AI Verdict panel */}
-          {verdict && verdict.verdict !== "ERROR" && (
-            <div style={{ background: `linear-gradient(135deg,${vc}08,#0a1220)`, border: `1px solid ${vc}28`, borderRadius: 10, padding: 16, display: "flex", flexDirection: "column", gap: 12 }} className="fade-in">
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 10 }}>
-                <div>
-                  <div style={{ fontSize: 8, color: "#3d5a70", letterSpacing: "0.15em", marginBottom: 4 }}>AI VERDICT</div>
-                  <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 24, fontWeight: 800, color: vc }}>{verdict.verdict}</div>
-                  <div style={{ color: "#7a8a9a", fontSize: 11, marginTop: 4, maxWidth: 300, lineHeight: 1.5 }}>{verdict.oneliner}</div>
-                </div>
-                <div style={{ textAlign: "right" }}>
-                  <div style={{ fontSize: 8, color: "#3d5a70", letterSpacing: "0.1em" }}>CONVICTION</div>
-                  <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 32, fontWeight: 800, color: vc, lineHeight: 1.1 }}>
-                    {verdict.conviction}<span style={{ fontSize: 14, color: "#3d5a70" }}>/10</span>
-                  </div>
-                  {verdict.priceTarget && (
-                    <div style={{ fontSize: 9, color: "#3d5a70", marginTop: 3 }}>TARGET <span style={{ color: "#e2e8f0" }}>{verdict.priceTarget}</span></div>
-                  )}
-                </div>
-              </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                <div>
-                  <div style={{ fontSize: 8, color: "#4ade80", letterSpacing: "0.1em", marginBottom: 6 }}>BULL CASE</div>
-                  {verdict.bulls?.map((b, i) => (
-                    <div key={i} style={{ fontSize: 10, color: "#7a8a9a", marginBottom: 4, paddingLeft: 8, borderLeft: "2px solid #4ade8030", lineHeight: 1.4 }}>▲ {b}</div>
-                  ))}
-                </div>
-                <div>
-                  <div style={{ fontSize: 8, color: "#ff6b6b", letterSpacing: "0.1em", marginBottom: 6 }}>BEAR CASE</div>
-                  {verdict.bears?.map((b, i) => (
-                    <div key={i} style={{ fontSize: 10, color: "#7a8a9a", marginBottom: 4, paddingLeft: 8, borderLeft: "2px solid #ff6b6b30", lineHeight: 1.4 }}>▼ {b}</div>
-                  ))}
-                </div>
-              </div>
-              {verdict.keyRisk && (
-                <div style={{ background: "#ff45600d", border: "1px solid #ff456028", borderRadius: 6, padding: "8px 12px", fontSize: 10, color: "#ff8080", lineHeight: 1.4 }}>
-                  ⚠ KEY RISK: {verdict.keyRisk}
+              {/* ⚡ button — fixed left column */}
+              <button onClick={fetchAI} disabled={aiLoading}
+                style={{ flexShrink: 0, background: aiLoading ? "#1a2a3a" : "linear-gradient(135deg,#00ff8818,#00b8ff10)", border: "none", borderRight: "1px solid #1a2a3a", color: aiLoading ? "#3d5a70" : "#00ff88", padding: "14px 16px", cursor: aiLoading ? "default" : "pointer", fontFamily: "monospace", fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", minWidth: 48 }}>
+                {aiLoading
+                  ? <div style={{ width: 14, height: 14, border: "2px solid #2d4050", borderTop: "2px solid #00ff88", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+                  : <span style={{ fontSize: 16 }}>⚡</span>}
+              </button>
+
+              {/* Right side content */}
+              {!verdict && !aiLoading && (
+                <div style={{ padding: "14px 16px", fontSize: 11, color: "#3d5a70", fontFamily: "monospace", letterSpacing: "0.1em", display: "flex", alignItems: "center" }}>
+                  GENERATE AI VERDICT
                 </div>
               )}
-              <button onClick={fetchAI}
-                style={{ background: "transparent", border: "1px solid #1a2a3a", color: "#3d5a70", padding: "5px 10px", borderRadius: 4, cursor: "pointer", fontSize: 9, fontFamily: "monospace", letterSpacing: "0.07em", alignSelf: "flex-start" }}>
-                ↻ REFRESH ANALYSIS
-              </button>
+              {aiLoading && (
+                <div style={{ padding: "14px 16px", fontSize: 10, color: "#3d5a70", fontFamily: "monospace", letterSpacing: "0.08em", display: "flex", alignItems: "center" }}>
+                  SYNTHESIZING SIGNALS...
+                </div>
+              )}
+              {verdict && verdict.verdict !== "ERROR" && (
+                <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 14px", flexWrap: "wrap", gap: 6 }}>
+                  <div>
+                    <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 17, fontWeight: 800, color: vc }}>{verdict.verdict}</div>
+                    <div style={{ fontSize: 9, color: "#7a8a9a", marginTop: 2, lineHeight: 1.4, maxWidth: 240 }}>{verdict.oneliner}</div>
+                  </div>
+                  <div style={{ textAlign: "right", flexShrink: 0 }}>
+                    <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 22, fontWeight: 800, color: vc, lineHeight: 1 }}>
+                      {verdict.conviction}<span style={{ fontSize: 10, color: "#3d5a70" }}>/10</span>
+                    </div>
+                    {verdict.priceTarget && (
+                      <div style={{ fontSize: 8, color: "#3d5a70", marginTop: 2 }}>TARGET <span style={{ color: "#e2e8f0" }}>{verdict.priceTarget}</span></div>
+                    )}
+                  </div>
+                </div>
+              )}
+              {verdict?.verdict === "ERROR" && (
+                <div style={{ padding: "14px 16px", fontSize: 10, color: "#ff8080", display: "flex", alignItems: "center" }}>⚠ {verdict.oneliner}</div>
+              )}
             </div>
-          )}
+
+            {/* Detail section — bull/bear/risk — shown when verdict exists */}
+            {verdict && verdict.verdict !== "ERROR" && (
+              <div style={{ borderTop: `1px solid ${vc}20`, padding: "10px 14px", display: "flex", flexDirection: "column", gap: 8 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                  <div>
+                    <div style={{ fontSize: 8, color: "#4ade80", letterSpacing: "0.1em", marginBottom: 5 }}>BULL CASE</div>
+                    {verdict.bulls?.map((b, i) => (
+                      <div key={i} style={{ fontSize: 9, color: "#7a8a9a", marginBottom: 3, paddingLeft: 7, borderLeft: "2px solid #4ade8030", lineHeight: 1.4 }}>▲ {b}</div>
+                    ))}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 8, color: "#ff6b6b", letterSpacing: "0.1em", marginBottom: 5 }}>BEAR CASE</div>
+                    {verdict.bears?.map((b, i) => (
+                      <div key={i} style={{ fontSize: 9, color: "#7a8a9a", marginBottom: 3, paddingLeft: 7, borderLeft: "2px solid #ff6b6b30", lineHeight: 1.4 }}>▼ {b}</div>
+                    ))}
+                  </div>
+                </div>
+                {verdict.keyRisk && (
+                  <div style={{ background: "#ff45600d", border: "1px solid #ff456028", borderRadius: 5, padding: "6px 10px", fontSize: 9, color: "#ff8080", lineHeight: 1.4 }}>
+                    ⚠ KEY RISK: {verdict.keyRisk}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
           {/* Model grid */}
           <div>
