@@ -263,6 +263,7 @@ export default function PositionsPage() {
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
           <Link href="/" style={{ color: "#3d5a70", fontSize: 9, textDecoration: "none", fontFamily: "monospace", letterSpacing: "0.07em", border: "1px solid #1a2a3a", padding: "5px 10px", borderRadius: 5 }}>← STOCKS</Link>
           <Link href="/portfolio" style={{ color: "#3d5a70", fontSize: 9, textDecoration: "none", fontFamily: "monospace", letterSpacing: "0.07em", border: "1px solid #1a2a3a", padding: "5px 10px", borderRadius: 5 }}>ETF OPTIMIZER</Link>
+          <Link href="/performance" style={{ color: "#34d399", fontSize: 9, textDecoration: "none", fontFamily: "monospace", letterSpacing: "0.07em", border: "1px solid #34d39930", padding: "5px 10px", borderRadius: 5 }}>PERFORMANCE</Link>
           <button onClick={() => setShowAdd(true)} style={{ background: "#00ff8818", border: "1px solid #00ff8840", color: "#00ff88", padding: "5px 12px", borderRadius: 5, cursor: "pointer", fontSize: 10, fontFamily: "monospace", fontWeight: 700 }}>+ ADD</button>
           <button onClick={refresh} style={{ background: "transparent", border: "1px solid #1a2a3a", color: "#3d5a70", padding: "5px 10px", borderRadius: 5, cursor: "pointer", fontSize: 10, fontFamily: "monospace" }}>↻</button>
         </div>
