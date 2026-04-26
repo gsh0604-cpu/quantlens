@@ -154,6 +154,10 @@ export default function Home() {
             style={{ background: "#f59e0b18", border: "1px solid #f59e0b40", color: "#f59e0b", padding: "7px 12px", borderRadius: 6, fontSize: 10, fontFamily: "monospace", fontWeight: 700, letterSpacing: "0.08em", textDecoration: "none", whiteSpace: "nowrap" }}>
             MY PORTFOLIO →
           </Link>
+          <Link href="/performance"
+            style={{ background: "#34d39918", border: "1px solid #34d39940", color: "#34d399", padding: "7px 12px", borderRadius: 6, fontSize: 10, fontFamily: "monospace", fontWeight: 700, letterSpacing: "0.08em", textDecoration: "none", whiteSpace: "nowrap" }}>
+            PERFORMANCE →
+          </Link>
         </div>
       </div>
 
